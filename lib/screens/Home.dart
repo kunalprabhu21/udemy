@@ -5,6 +5,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../theme/screen_util.dart';
 import '../theme/theme_helper.dart';
+import 'Searchview.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -38,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 SizedBox(height: 44,),
                 CustomSearchView(
+                  onPressedSearchBar: openSearchDelegate,
                   onPressedSuffix: openBottomSheet,
                   autofocus: false,
                   controller: searchController,
@@ -138,12 +140,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               // height: 90.0, // Adjust the width as needed
                               width: 250,
-
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-
                                     children: [
                                       Text("Graphic Design",style: theme.textTheme.titleSmall?.copyWith(color: Color(0xffFF6B00)),),
                                       Icon(Icons.favorite_border)
@@ -258,6 +258,14 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
+
+  void openSearchDelegate() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SearchView()),
+    );
+  }
+
   /// Section Widget
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
@@ -319,6 +327,7 @@ class CustomSearchView extends StatelessWidget {
     this.validator,
     this.onChanged,
     this.onPressedSuffix,
+    this.onPressedSearchBar,
   }) : super(
     key: key,
   );
@@ -367,13 +376,18 @@ class CustomSearchView extends StatelessWidget {
 
   final VoidCallback? onPressedSuffix;
 
+  final VoidCallback? onPressedSearchBar;
+
   @override
   Widget build(BuildContext context) {
     return alignment != null
-        ? Align(
+        ? GestureDetector(
+      onTap: onPressedSearchBar,
+          child: Align(
       alignment: alignment ?? Alignment.center,
       child: searchViewWidget(context),
-    )
+    ),
+        )
         : searchViewWidget(context);
   }
 
@@ -390,6 +404,7 @@ class CustomSearchView extends StatelessWidget {
     ),
     width: width ?? double.maxFinite,
     child: TextFormField(
+      onTap: onPressedSearchBar,
       scrollPadding:
       EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       controller: controller,
