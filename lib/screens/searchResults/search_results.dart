@@ -80,57 +80,95 @@ class _YourContentWidgetState extends State<YourContentWidget> {
               Text('2480 Founds',style: theme.textTheme.titleSmall?.copyWith(color: appTheme.blueA700),),
             ],
           ),
-          SizedBox(height: 15,),
-          Container(
-   // Background color of the container
+          Expanded(
+            child: ListView.separated(
+                separatorBuilder: (context, index) => SizedBox(
+                  height: 10,
+                ),
+              physics: BouncingScrollPhysics(),
 
-    child: Row(
-    children: [
-    // Image container (one fourth of the width)
-    Container(
-    width: MediaQuery.of(context).size.width / 4,
-    color: Colors.black,
-      child: Text("wd"),
-    ),
-    SizedBox(width: 16.0), // Adjust the spacing between image and text
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int index) {
 
-    // Text container (remaining three fourths of the width)
-    Expanded(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
+                return   Container(
+                  decoration: BoxDecoration(
+                    color:  Colors.white ,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(16.0),
+                      bottomRight: Radius.circular(16.0),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2), // Shadow color
+                        spreadRadius: 1, // Spread radius
+                        blurRadius: 8, // Blur radius
+                        offset: Offset(0, 3), // Offset in x and y
+                      ),
+                    ],
+                  ),
+                  // Background color of the container
+                  height: 120.0,
+                  child: Row(
 
-          children: [
-            Text("Graphic Design",style: theme.textTheme.titleSmall?.copyWith(color: Color(0xffFF6B00)),),
-            Icon(Icons.favorite_border)
-          ],
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-        ),
-        Text("Graphic Design Advanced",style: theme.textTheme.titleMedium?.copyWith(color: Colors.black),),
-        SizedBox(height: 8,),
-        Row(
-          children: [
-            Text("₹2888",style: CustomTextStyles.mulishExtraBold15Blue,),
-            SizedBox(width: 15,),
-            Text("|",style: CustomTextStyles.jostMedium18,),
-            SizedBox(width: 15,),
-            Icon(Icons.star,color: Colors.orangeAccent,size: 15,),
-            Text("4.2",style: CustomTextStyles.mulishExtraBold11,),
-            SizedBox(width: 15,),
-            Text("|",style: CustomTextStyles.jostMedium18,),
-            SizedBox(width: 15,),
-            Text("7830 Std",style: CustomTextStyles.mulishExtraBold11,),
-          ],
-        )
-      ],
-    ),
-    ),
-    ],
-    ),
-    ),
+                    children: [
+                      // Image container (one fourth of the width)
+                      Container(
+                        decoration: BoxDecoration(
+                          color:  Colors.black ,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(16.0),
+                            bottomLeft: Radius.circular(16.0),
+                          ),
+                        ),
+                        width: MediaQuery.of(context).size.width / 4,
+                        // Background color of the left container
+
+                      ),
+                      SizedBox(width: 16.0), // Adjust the spacing between image and text
+
+                      // Text container (remaining three fourths of the width)
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+
+                              children: [
+                                Text("Graphic Design",style: theme.textTheme.titleSmall?.copyWith(color: Color(0xffFF6B00)),),
+
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                            ),
+                            SizedBox(height: 8,),
+                            Text("Graphic Design Advanced",style: theme.textTheme.titleMedium?.copyWith(color: Colors.black),),
+                            SizedBox(height: 8,),
+                            Row(
+                              children: [
+                                Text("₹2888",style: CustomTextStyles.mulishExtraBold15Blue,),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Icon(Icons.star,color: Colors.orangeAccent,size: 15,),
+                                Text("4.2",style: CustomTextStyles.mulishExtraBold11,),
+                                SizedBox(width: 15,),
+                                Text("|",style: CustomTextStyles.jostMedium18,),
+                                SizedBox(width: 15,),
+                                Text("7830 Std",style: CustomTextStyles.mulishExtraBold11,),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+
+              },
+            ),
+          ),
         ],
       ),
     );
